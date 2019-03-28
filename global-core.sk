@@ -1,0 +1,479 @@
+script options:
+	$ use permissions
+options:
+	lobby: lobby
+function noPermissions(p: player):
+	play sound "entity.villager.no" with volume 1 and pitch 1 at {_p} for {_p}
+function tabJunk():
+	loop all players:
+		set tab header to "&7&m* *%nl%&7%nl%&6&lCOUGAR%nl%&f   Minigames and more.%nl%%nl%&7&m* *" and footer to "&7&m* *%nl%&7%nl%&fThere are &e%amount of players% Players &fonline.%nl%&fSupport us with &e/buy&f!%nl%&f%nl%&7&m* *" for loop-player
+		console command "/nte player %loop-player% prefix %loop-player's prefix% '" 
+every 1 second:
+	tabJunk()
+on join:
+	tabJunk()	
+	set join message to "%player's prefix% &7%player% &7has connected."
+on quit:
+	set quit message to "%player's prefix% &7%player% has disconnected."
+function sendWebsite(p: player):
+	send "&eInteract with your fellow &6Cougars &eon our forums. <link:http://www.cougarmc.tk>&aClick me!<reset>" to {_p}
+command /website [<text>]:
+	aliases: /web, /forums, /interactwithyourfellowcougarsonourforumsclickme!
+	trigger:
+		sendWebsite(player)
+function sendStore(p: player):
+	send "&bSupport us by purchasing something from our webstore! &e<underline><link:https://cougarmc.buycraft.net>Click me!<reset>" to {_p}
+command /buy [<text>]:
+	trigger:
+		sendStore(player)
+function sendDiscord(p: player):
+	send "&9Discord Server: &b<underline><link:https://discord.gg/dd3P7w9>Click me!<reset>" to {_p}
+command /discord [<text>]:
+	trigger:
+		sendDiscord(player)
+function sendHelp(p: player):
+	send "" to {_p}
+	send "&6&lCOUGAR &7Help" to {_p}
+	send "" to {_p}
+	send "&6/help &7- &fDisplays this list" to {_p}
+	send "&6/discord &7- &fSend Discord Link" to {_p}
+	send "&6/buy &7- &fSend Store Link" to {_p}
+	send "&6/report &7- &fReport Commands" to {_p}
+	send "&6/msg &7- &fMessage a Player" to {_p}
+	send "&6/website &7- &fSend Website Link" to {_p}
+	send "" to {_p}
+	send "&fIf you need additional help, contact staff." to {_p}
+	send "" to {_p}
+function sendPlugins(p: player):
+	send "&fPlugins: &aYou do not have permission to view our plugins list. Plugins are coded by our own developers. For more information, feel free to contact a Developer." to {_p}
+function getInterface(p: player):
+	set {_reqInt} to random number between 1 and 999
+	set {_reqInt} to rounded {_reqInt}
+	set {_ranDiv} to random number between 1 and 10
+	set {_ranDiv} to rounded {_ranDiv}
+	set {_rawReq} to {_reqInt}/{_ranDiv}
+	send "" to {_p}
+	send "&fRunning the &6&lCOUGAR &fMinecraft Interface by &e_C02" to {_p}
+	send "&fVersion: &e1.0-SNAPSHOT" to {_p}
+	send "&fThere are currently &6%{_reqInt}% interactions &fin requisition. (&6%{_rawReq}%/1s&f)" to {_p}
+	send "" to {_p}
+command /ver [<text>]:
+	trigger:
+		getInterface(player)
+command /about [<text>]:
+	trigger:
+		getInterface(player)
+command /bukkit:about [<text>]:
+	trigger:
+		getInterface(player)
+command /bukkit:ver [<text>]:
+	trigger:
+		getInterface(player)
+command /version [<text>]:
+	trigger:
+		getInterface(player)
+command /bukkit:version [<text>]:
+	trigger:
+		getInterface(player)
+on command:
+	if command = "help" or "bukkit:help" or "?" or "bukkit:?":
+		cancel event
+		sendHelp(player)
+	else if command = "pl" or "plugins" or "bukkit:pl" or "bukkit:plugins":
+		if player has permission "rank.admin":
+			stop
+		else:
+			cancel event
+			sendPlugins(player)
+command /cc [<text>]:
+	aliases: /clearchat
+	trigger:
+		if player has permission "rank.helper":
+			loop 100 times:
+				broadcast "&7"			
+			broadcast "&6&lCHAT &7was cleared by %player's prefix% %player%"
+			loop all players:
+				play sound "block.note.pling" with volume 1 with pitch 1 at loop-player for loop-player
+		else:
+			send "&c(Permissions) &7You must be &9[HELPER] &7or higher to use this command!"
+			noPermissions(player)
+command /gm [<offline player>]:
+	trigger:
+		if player has permission "rank.builder":
+			if arg 1 is not set:
+				if player's gamemode = creative:
+					set player's gamemode to survival
+					send "&aYou are now in Gamemode Survival."
+				else:
+					set player's gamemode to creative
+					send "&aYou are now in Gamemode Creative."
+			else:
+				if player has permission "rank.srmod":
+					if arg-1's gamemode = creative:
+						set arg-1's gamemode to survival
+						send "&aYou are now in Gamemode Survival." to arg-1
+					else:
+						set arg-1's gamemode to creative
+						send "&aYou are now in Gamemode Creative." to arg-1
+				else:
+					send "&c(Permissions) &7You must be &6[SR.MOD] &7or higher to use this command!"
+					noPermissions(player)
+		else:
+			send "&c(Permissions) &7You must be &3[BUILD-TEAM] &7or higher to use this command!"
+			noPermissions(player)
+command /tp [<text>] [<text>] [<text>] [<text>] [<text>]:
+	aliases: /teleport
+	trigger:
+		if player has permission "rank.jrmod":
+			if arg-1 is not set:
+				send "&7Commands List:"
+				send "&f/tp <target> &7Teleport to a player"
+				send "&f/tp b(ack) &7Undo Teleports"
+				send "&f/tp h(ere) <player> &7Teleport Player to Self"
+				send "&f/tp <player> <target> &7Teleport Player to Player"
+				send "&f/tp <player> <X> <Y> <Z> &7Teleport to Location"
+				send "&f/tp all &7Teleport All to Self"
+				noPermissions(player)
+			else:
+				if arg-2 is not set:
+					if arg-1 is set:
+						if arg-1 is not "all":
+							if arg-1 is not "here" or "h" or "back" or "b":
+								if arg-1 parsed as player is online:
+									set {function.tp.back.%player%} to location of player
+									teleport player to arg-1 parsed as player's location
+									set {_t} to arg-1 parsed as player
+									send "&7Teleported to &e%{_t}%&7."
+								else:
+									send "&7Could not locate &e%arg-1%&7."
+									noPermissions(player)
+						if arg-1 is "all":
+							if player has permission "rank.owner":
+								teleport all players to player
+								send "&7You teleported &e%amount of players% Players &7to yourself."
+								broadcast "&7You teleported to &e%player%&7."
+							else:
+								send "&c(Permissions) &7You must be &c[OWNER] &7or higher to use this command!"
+								noPermissions(player)
+				if arg 4 is set:
+					if arg-1 parsed as player is online:
+						set {_p} to arg-1 parsed as a player
+						set {_x} to arg-2 parsed as a number
+						set {_y} to arg-3 parsed as a number
+						set {_z} to arg-4 parsed as a number
+						if {_x} is not set:
+							send "&7Invalid X-Coordinate [&e%arg-2%&7]."
+							noPermissions(player)
+							stop
+						if {_y} is not set:
+							send "&7Invalid Y-Coordinate [&e%arg-3%&7]."
+							noPermissions(player)
+							stop
+						if {_z} is not set:
+							send "&7Invalid Z-Coordinate [&e%arg-4%&7]."
+							noPermissions(player)
+							stop
+						teleport {_p} to the location at {_x}, {_y}, {_z}
+						send "&7Teleported &e%{_p}% &7%{_x}%, %{_y}%, %{_z}%."
+					else:
+						send "&7Could not locate &e%arg-1%&7."
+						noPermissions(player)
+							
+				if arg-1 is "here" or "h":
+					if player has permission "rank.admin":
+						if arg-3 is not set:
+							if arg-2 is set:
+								if arg-2 parsed as player is online:
+									teleport arg-2 parsed as player to player's location
+									send "&7%player% teleported you to self." to arg-2 parsed as player
+									set {_t} to arg-2 parsed as player
+									send "&7Teleported &e%arg-2% &7to self."
+									stop
+								else:
+									send "&7Could not locate &e%arg-2%&7."
+									noPermissions(player)
+					else:
+						send "&c(Permissions) &7You must be &c[ADMIN] &7or higher to use this command!"
+						noPermissions(player)
+						stop
+					if arg-2 is not set:
+						send "&7Commands List:"
+						send "&f/tp <target> &7Teleport to a player"
+						send "&f/tp b(ack) &7Undo Teleports"
+						send "&f/tp h(ere) <player> &7Teleport Player to Self"
+						send "&f/tp <player> <target> &7Teleport Player to Player"
+						send "&f/tp <player> <X> <Y> <Z> &7Teleport to Location"
+						send "&f/tp all &7Teleport All to Self"
+				if arg-1 is "back" or "b":
+					if {function.tp.back.%player%} is set:
+						set {_new} to {function.tp.back.%player%}
+						set {function.tp.back.%player%} to location of player
+						teleport player to {_new}
+						send "&7You have been teleported to your previous location."
+					else:
+						send "&7There is no place to teleport you back to."
+						noPermissions(player)
+						stop
+				if arg-3 is not set:
+					if arg-2 is set:
+						if player has permission "rank.admin":
+							if arg-2 parsed as player is online:
+								if arg-1 parsed as player is online:
+									set {function.tp.back.%player%} to location of player
+									teleport arg-1 parsed as player to arg-2 parsed as player
+									set {_t1} to arg-1 parsed as player
+									set {_t} to arg-2 parsed as player
+									send "&e%{_t1}% &7was teleported to you." to arg-2 parsed as player
+									send "&7You were teleported to &e%{_t}%&7." to arg-1 parsed as player
+									stop
+								else:
+									send "&7Could not locate &e%arg-1%&7."
+									noPermissions(player)
+							else:
+								send "&7Could not locate &e%arg-2%&7."
+								noPermissions(player)
+						else:
+							send "&c(Permissions) &7You must be &c[ADMIN] &7or higher to use this command!"
+							noPermissions(player)
+		else:
+			send "&c(Permissions) &7You must be &9[HELPER] &7or higher to use this command!"
+			noPermissions(player)
+command /testforpermissions [<text>]:
+	trigger:
+		if player has permission "rank.d1":
+			send "&7D1: TRUE"
+		if player has permission "rank.d2":
+			send "&7D2: TRUE"
+		if player has permission "rank.d3":
+			send "&7D3: TRUE"
+		if player has permission "rank.media" or "rank.content":
+			send "&7MEDIA: TRUE"
+		if player has permission "rank.builder":
+			send "&7BUILDER: TRUE"
+		if player has permission "rank.jrmod":
+			send "&7HELPER: TRUE"
+		if player has permission "rank.mod":
+			send "&7MOD: TRUE"
+		if player has permission "rank.srmod":
+			send "&7SRMOD: TRUE"
+		if player has permission "rank.admin":
+			send "&7ADMIN: TRUE"
+		if player has permission "rank.owner":
+			send "&7OWNER: TRUE"
+		send "&cIf no values return, you do not have the permissions for the groups not listed."
+command /vanish [<text>]:
+	aliases: /incognito, /v
+	trigger:
+		if player has permission "rank.jrmod":
+			if {vanish.%player%} is true:
+				loop all players:
+					if loop-value doesn't have permission "rank.admin":
+						add loop-value to {_vanishto::*}
+				
+				reveal player from all players
+				set {vanish.%player%} to false
+				send "&7Disabled moderator mode."
+				send "&7You are no longer incognito. Your status will only change when you run &e/vanish &7again."
+			else:
+				loop all players:
+					if loop-value doesn't have permission "rank.admin":
+						add loop-value to {_vanishto::*}
+				
+				hide player from {_vanishto::*}
+				set {vanish.%player%} to true
+				send "&7Enabled moderator mode."
+				send "&7You are now incognito. Your status will only change when you run &e/vanish &7again."
+		else:
+			send "&c(Permissions) &7You must be &9[HELPER] &7or higher to use this command!"
+			noPermissions(player)
+
+command /report [<offline player>] [<text>]:
+	trigger:
+		if arg 1 is set:
+			if arg 2 is set:
+				add 1 to {reports}
+				set {report.id.%player%.%arg-1%} to {reports}
+				add 1 to {reports.total.%arg-1's UUID%}
+				send "&c[Report &b##%{report.id.%player%.%arg-1%}%&c] &7Your report against &c%arg-1% &7has been sent to online staff."
+				play sound "entity.villager.yes" with volume 1 with pitch 2 at player for player
+				loop all players:
+					if loop-player has permission "rank.jrmod":
+						send "&c&l[REPORT &b##%{report.id.%player%.%arg-1%}%&c&l] &e%arg-1% &7was reported by &e%player% &7for &f%arg-2%" to loop-player
+						send "&c&l[REPORT &b##%{report.id.%player%.%arg-1%}%&c&l] &7Total reports against &e%arg-1%&7: &c%{reports.total.%arg-1's UUID%}%" to loop-player
+						play sound "block.note.pling" with volume 1 with pitch 0 at loop-player for loop-player
+						if {reports.total.%arg-1's UUID%} > 5:
+							send "&c&lWARNING: &e%arg-1% &7has been reported &c5 or more times&7. &6Please investigate&7." to loop-player
+			else:
+				send "&cUsage: /report <player> <reason>"
+				send "&cAbusing the report system can result in a ban."
+				noPermissions(player)
+		else:
+			send "&cUsage: /report <player> <reason>"
+			send "&cAbusing the report system can result in a ban."
+			noPermissions(player)
+command /resetreportcount [<offline player>]:
+	aliases: /rrc
+	trigger:
+		if player has permission "rank.mod":
+			if arg 1 is set:
+				set {reports.total.%arg-1's UUID%} to 0
+				send "&c[Report] &7You have set &e%arg-1%'s &7report count to &e0"
+			else:
+				send "&cUsage: /rrc <player>"
+		else:
+			send "&c(Permissions) &7You must be &6[MOD] &7or higher to use this command!"
+			noPermissions(player)
+on command:
+	if command is "me" or "minecraft:me" or "say" or "minecraft:say":
+		cancel event
+		send "&cYour name is %player%. You just tried to use a no no command. How dare you? We will OP you instead."
+		send "&7&o[Server: Opped %player%]"
+		noPermissions(player)
+
+function autoBC():
+	broadcast ""
+	broadcast "&b(Note) &fNo one likes a jerk. Treat others with respect and kindness."
+	broadcast ""
+	wait 120 seconds
+	broadcast ""
+	broadcast "&b(Note) &fWant to host a Minecraft Server for free? Check out our partner &ehttps://www.kingdoms.gg"
+	broadcast ""
+	wait 120 seconds
+	broadcast ""
+	broadcast "&b(Note) &fWant to Support &6Cougar&f? Visit &ehttp://www.cougarmc.tk/store"
+	broadcast ""
+	wait 120 seconds
+	broadcast ""
+	broadcast "&b(Note) &fDo you suspect someone of cheating? Use &e/report &finstead of saying so in chat."
+	broadcast ""
+	wait 120 seconds
+	autoBC()
+command /autob [<text>]:
+	trigger:
+		if player has permission "rank.admin":
+			autoBC()
+		else:
+			send "&c(Permissions) &7You must be &c[ADMIN] &7or higher to use this command!"
+			noPermissions(player)
+
+
+command /give [<string>] [<string>] [<string>] [<string>] [<string>]:
+	aliases: /g, /item, /i
+	trigger:
+		if player has permission "rank.srmod":
+			if arg 1 is not set:
+				send "&7Give Commands:"
+				send "&7/give (item)"
+				send "&7/give (player) (item) (amount)"
+				send "&7/give (player) (item) (amount) (Enchantment:level)"
+				send "&7/give all (item) (amount)"
+				send "&7/give all (item) (amount) (Enchantment:level)"
+				send "&4&l* &fThis command should only be used for events or by &c[ADMIN]&fs"
+			else if arg 5 is set:
+				send "&7Give Commands:"
+				send "&7/give (item)"
+				send "&7/give (player) (item) (amount)"
+				send "&7/give (player) (item) (amount) (Enchantment:level)"
+				send "&7/give all (item) (amount)"
+				send "&7/give all (item) (amount) (Enchantment:level)"
+				send "&4&l* &fThis command should only be used for events or by &c[ADMIN]&fs"
+			else:
+				if arg 2 is not set:
+					set {_i1} to arg-1
+					replace all "_" with " " in {_i1}
+					set {_i} to "%{_i1}%" parsed as an item
+					if {_i} is an item:
+						send "&7You gave &e1 %{_i}% &7to &e%player%&7."
+						give player {_i}
+					else:
+						send "&e0 &7matches for [&e%arg-1%&7]."
+			if arg 2 is set:
+				if arg 3 is set:
+					if arg 1 is "all":
+						set {_i1} to arg-2
+						replace all "_" with " " in {_i1}
+						set {_i} to "%{_i1}%" parsed as an item
+						set {_a} to arg-3 parsed as a number
+						if {_i} is an item:
+							if {_a} is a number:
+								if arg 4 is set:
+									set {_e} to arg-4
+									set {_oe} to arg-4
+									replace all "_" with " " in {_e}
+									replace all ":" with " " in {_e}
+									if "%{_e}%" parsed as an enchantment type is an enchantment type:
+										set {_e} to "%{_e}%" parsed as an enchantment type
+										enchant {_i} with "%{_e}%" parsed as a enchantment type
+									else:
+										send "&7Invalid Enchantment [&6%{_oe}%&7]."
+								send "&7You gave &e%{_a}% %{_i}% &7to &eALL&7."
+								send "&7You received &e%{_a}% %{_i}% &7from &e%player%&7." to all players
+								loop all players:
+									loop {_a} times:
+										give loop-player {_i}
+							else:
+								send "&7Invalid Amount [%arg-3%]. Defaulting to [1]."
+								send "&7You gave &e1 %{_i}% &7to &eALL&7."
+								send "&7You received &e1 %{_i}% &7from &e%player%&7." to all players
+								loop all players:
+									give loop-player {_i}
+						else:
+							send "&e0 &7matches for [&e%{_i1}%&7]."
+					else:
+						set {_i1} to arg-2
+						replace all "_" with " " in {_i1}
+						set {_i} to "%{_i1}%" parsed as an item
+						set {_a} to arg-3 parsed as a number
+						set {_p} to arg-1 parsed as a player
+						if {_i} is an item:
+							if {_p} is online:
+								if {_a} is a number:
+									if arg 4 is set:
+										set {_e} to arg-4
+										set {_oe} to arg-4
+										replace all "_" with " " in {_e}
+										replace all ":" with " " in {_e}
+										if "%{_e}%" parsed as an enchantment type is an enchantment type:
+											set {_e} to "%{_e}%" parsed as an enchantment type
+											enchant {_i} with "%{_e}%" parsed as a enchantment type
+										else:
+											send "&7Invalid Enchantment [&6%{_oe}%&7]."
+									send "&7You gave &e%{_a}% %{_i}% &7to &e%{_p}%&7."
+									send "&7You received &e%{_a}% %{_i}% &7from &e%player%&7." to {_p}
+									loop {_a} times:
+										give {_p} {_i}
+								else:
+									send "&7Invalid Amount [%arg-3%]. Defaulting to [1]."
+									send "&7You gave &e1 %{_i}% &7to &e%{_p}%&7."
+									send "&7You received &e1 %{_i}% &7from &e%player%&7." to {_p}
+									give {_p} {_i}
+							else:
+								send "&e0 &7matches for [&e%arg-1%&7]."
+						else:
+							send "&e0 &7matches for [&e%arg-2%&7]."
+				else:
+					if arg 1 is "all":
+						set {_i1} to arg-2
+						replace all "_" with " " in {_i1}
+						set {_i} to "%{_i1}%" parsed as an item
+						if {_i} is an item:
+							send "&7You gave &e1 %{_i}% &7to &eALL&7."
+							send "&7You received &e1 %{_i}% &7from &e%player%&7." to all players
+							loop all players:
+								give loop-player {_i}
+						else:
+							send "&e0 &7matches for [&e%arg-2%&7]."
+					else:
+						set {_i1} to arg-2
+						replace all "_" with " " in {_i1}
+						set {_i} to "%{_i1}%" parsed as an item
+						set {_p} to arg-1 parsed as a player
+						if {_i} is an item:
+							if {_p} is online:
+								send "&7You gave &e1 %{_i}% &7to &e%{_p}%&7."
+								send "&7You received &e1 %{_i}% &7from &e%player%&7." to {_p}
+								give {_p} {_i}
+							else:
+								send "&e0 &7matches for [&e%arg-1%&7]."
+						else:
+							send "&e0 &7matches for [&e%arg-2%&7]."
