@@ -1,0 +1,224 @@
+MySQL:
+  Host: localhost
+  Port: 3306
+  UseSSL: false
+  Username: root
+  Password: M2lZFzG3TrUGcJgbo
+  Database: friends
+  TablePrefix: fr_
+  Pool:
+    InitialPoolSize: 3
+    MinPoolSize: 3
+    MaxPoolSize: 15
+    IdleConnectionTestPeriod: 290
+    TestConnectionOnCheckin: false
+General:
+  UseOwnLanguageFile: true
+  CheckForUpdates: true
+  Language: English
+  MultiCoreEnhancement: true
+  Time:
+    LanguageTag: US
+    TimeZone: America/New_York
+    Format: dd/MM/yyyy HH:mm:ss
+  PartyDoNotJoinTheseServers:
+  - lobby
+  - lobby1
+  - lobby2
+  DisabledServers:
+  - login1
+  - login2
+  MaxPlayersInParty: 0
+Extensions:
+  UseExtensionFolderAsConfigFolder: false
+Permissions:
+  NoPlayerLimitForParties: ''
+Commands:
+  Friends:
+    General:
+      PrintOutHelpOnError: true
+    TopCommands:
+      Friend:
+        Names:
+        - friend
+        - friends
+        Permissions: ''
+        Disabled: false
+      Reply:
+        Names:
+        - reply
+        - r
+        Disabled: true
+      MSG:
+        Names:
+        - msg
+        - fmsg
+        Disabled: true
+        MSGNonFriendsPermission: de.simonsator.partyandfriends.msg.msgnonfriends
+    SubCommands:
+      Accept:
+        Names:
+        - accept
+        - approve
+        Permission: ''
+        Priority: 3
+        SendTextIsNowOnline: true
+      Add:
+        Names:
+        - add
+        - addfriend
+        Permission: ''
+        Priority: 2
+        FriendRequestTimeout: 0
+      Deny:
+        Names:
+        - deny
+        - reject
+        Permission: ''
+        Priority: 4
+      Jump:
+        Names:
+        - jump
+        - jumpto
+        Disabled: false
+        Permission: ''
+        Priority: 6
+        DisabledServers:
+        - login1
+        - adminlobby1
+      List:
+        Names:
+        - list
+        - info
+        Disabled: false
+        Permission: ''
+        Priority: 0
+        SortElements: true
+        EntriesPerPage: 10
+      MSG:
+        Names:
+        - msg
+        - message
+        Disabled: true
+        Permission: ''
+        Priority: 1
+        ReplyCommand: /friend msg [PLAYER]
+      Remove:
+        Names:
+        - remove
+        - deleteAccount
+        Permission: ''
+        Priority: 5
+        UseFriendRemovedYouMessage: false
+      Settings:
+        Names:
+        - setting
+        - settings
+        Disabled: false
+        Permission: ''
+        Priority: 7
+        Settings:
+          FriendRequest:
+            Names:
+            - friendrequest
+            - receivefriendrequests
+            - friendrequests
+            Enabled: true
+            Permission: ''
+            Priority: 0
+          Jump:
+            Names:
+            - jump
+            - allowjump
+            Enabled: true
+            Permission: ''
+            Priority: 1
+          Offline:
+            Names:
+            - offline
+            - alwaysoffline
+            Enabled: true
+            Permission: ''
+            Priority: 2
+          PM:
+            Names:
+            - pm
+            - message
+            - messages
+            Enabled: false
+            Permission: ''
+            Priority: 3
+          PartyInvite:
+            Names:
+            - invite
+            - party
+            Enabled: true
+            Permission: ''
+            Priority: 4
+  Party:
+    General:
+      PrintOutHelpOnError: true
+      PrintOnlyExecutableSubCommandsOut: true
+    TopCommands:
+      Party:
+        Names:
+        - party
+        - parties
+        Permissions: ''
+        Disabled: false
+      PartyChat:
+        Names:
+        - partychat
+        - p
+        Permissions: ''
+        Disabled: false
+    SubCommands:
+      Join:
+        Names:
+        - join
+        - j
+        Permissions: ''
+        Priority: 0
+        AutoJoinLeaderServer: true
+      Invite:
+        Names:
+        - invite
+        - add
+        Permissions: ''
+        Priority: 1
+      Kick:
+        Names:
+        - kick
+        - forcedleave
+        Disabled: false
+        Permissions: ''
+        Priority: 6
+      Info:
+        Names:
+        - info
+        - list
+        Disabled: false
+        Permissions: ''
+        Priority: 3
+      Leave:
+        Names:
+        - leave
+        - le
+        Permissions: ''
+        Priority: 5
+      Chat:
+        Names:
+        - chat
+        - message
+        - msg
+        ReplyCommand: chat
+        Disabled: true
+        Permissions: ''
+        Priority: 4
+      Leader:
+        Names:
+        - leader
+        - lead
+        Disabled: false
+        Permissions: ''
+        Priority: 7
