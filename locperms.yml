@@ -1,0 +1,142 @@
+groups:
+  default:
+    options:
+      default: 'true'
+    permissions:
+    - modifyworld.*
+    inheritance: []
+  d1:
+    permissions:
+    - rank.d1
+    options:
+      prefix: '&a[Mega]'
+  d2:
+    options:
+      prefix: '&d[Super]'
+    permissions:
+    - rank.d2
+    - rank.d1
+  d3:
+    options:
+      prefix: '&4[Champion]'
+    permissions:
+    - rank.d3
+    - rank.d2
+    - rank.d1
+  helper:
+    options:
+      prefix: '&9[HELPER]'
+    permissions:
+    - rank.jrmod
+    - rank.d3
+    - rank.d2
+    - rank.d1
+  mod:
+    permissions:
+    - rank.mod
+    - rank.helper
+    - rank.d4
+    - rank.d3
+    - rank.d2
+    - rank.d1
+    options:
+      prefix: '&6[MOD]'
+  srmod:
+    permissions:
+    - rank.srmod
+    - rank.mod
+    - rank.jrmod
+    - rank.helper
+    - rank.d3
+    - rank.d2
+    - rank.d1
+    options:
+      prefix: '&6[SR.MOD]'
+  admin:
+    options:
+      prefix: '&c[ADMIN]'
+    permissions:
+    - permissions*
+    - rank.admin
+    - rank.srmod
+    - rank.mod
+    - rank.jrmod
+    - rank.helper
+    - rank.d3
+    - rank.d2
+    - rank.d1
+  dev:
+    permissions:
+    - permissions*
+    - rank.admin
+    - rank.srmod
+    - rank.mod
+    - rank.jrmod
+    - rank.helper
+    - rank.d3
+    - rank.d2
+    - rank.d1
+    options:
+      prefix: '&c[DEV]'
+  owner:
+    permissions:
+    - '*'
+    options:
+      prefix: '&c[OWNER]'
+  builder:
+    permissions:
+    - rank.builder
+    - rank.d3
+    - rank.d2
+    - rank.d1
+    options:
+      prefix: '&3[BUILD-TEAM]'
+  YT:
+    permissions:
+    - rank.media
+    - rank.content
+    - rank.d3
+    - rank.d2
+    - rank.d1
+    options:
+      prefix: '&c[YOU&fTUBE&c]'
+  twitch:
+    permissions:
+    - rank.media
+    - rank.content
+    - rank.d3
+    - rank.d2
+    - rank.d1
+    options:
+      prefix: '&5[TWITCH]'
+schema-version: 1
+users:
+  dfa32bd3-a912-4e33-a869-de715e42da88:
+    permissions:
+    - permissions*
+    options:
+      name: _C02
+    group:
+    - owner
+  94dbc162-0259-483a-8811-d92048067937:
+    permissions:
+    - permissions*
+    options:
+      name: Farwl
+    group:
+    - dev
+  e8bab249-cee5-49f8-bb81-6492a075d237:
+    group:
+    - admin
+    options:
+      name: Itslongvahung
+  d51b2ae7-3b7f-45fa-8432-e8483c564d28:
+    group:
+    - dev
+    options:
+      name: R2a_
+  72c955c2-81ec-4ced-a00a-688084af0ed4:
+    group:
+    - dev
+    options:
+      name: cheekeh
