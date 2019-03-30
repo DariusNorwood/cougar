@@ -10,4 +10,4 @@ $GLOBALS['email'] = array(
   'smtp_auth' => true,
 );
 
-*/This is unused
+//This is unused
