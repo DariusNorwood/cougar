@@ -1,0 +1,95 @@
+default:
+  permissions:
+JrMod:
+  permissions:
+  - bungeecord.command.find
+  - bmsg.command.staffchat
+  - bmsg.command.msg
+  - bmsg.command.reply
+  - litebans.warn
+  - litebans.kick
+  - litebans.tempmute
+Mod:
+  permissions:
+  - bungeecord.command.find
+  - bungeecord.command.send
+  - bmsg.command.staffchat
+  - litebans.warn
+  - litebans.kick
+  - litebans.tempmute
+  - litebans.mute
+  - litebans.tempban
+  - litebans.ban
+  - litebans.unmute
+  - litebans.unban
+  - bmsg.command.reply
+  - bmsg.command.msg
+  parents:
+  - JrMod
+SrMod:
+  permissions:
+  - bungeecord.command.find
+  - bungeecord.command.send
+  - bungeecord.command.alert
+  - bungeecord.command.ip
+  - bmsg.command.staffchat
+  - bungeecord.command.find
+  - bungeecord.command.send
+  - bmsg.command.staffchat
+  - litebans.warn
+  - litebans.kick
+  - litebans.tempmute
+  - litebans.mute
+  - litebans.tempban
+  - litebans.ban
+  - litebans.unmute
+  - litebans.unban
+  - litebans.ipban
+  - litebans.dupeip
+  - bmsg.command.msg
+  - bmsg.command.reply
+  parents:
+  - Mod
+  - Mod
+  - JrMod
+Admin:
+  permissions:
+  - bungeecord.command.send
+  - bungeecord.command.reload
+  - bungeemotd.set
+  - bungeemotd.reload
+  - permissionscord.command.pcord
+  - pcord.command.perms
+  - bungeecord.command.perms
+  - bmsg.command.staffchat
+  - bungeecord.command.alert
+  - bungeecord.command.find
+  - bungeecord.command.ip
+  - bungeecord.command.end
+  - bungeecord.command.list
+  - bungeecord.command.server
+  - bmsg.command.broadcast
+  - bmsg.command.reload
+  - bmsg.command.togglemsg
+  - bmsg.command.bmsg
+  - bungeecord.command.find
+  - bungeecord.command.send
+  - bmsg.command.staffchat
+  - litebans.warn
+  - litebans.kick
+  - litebans.tempmute
+  - litebans.mute
+  - litebans.tempban
+  - litebans.ban
+  - litebans.unmute
+  - litebans.unban
+  - litebans.ipban
+  - litebans.dupeip
+  - litebans.reload
+  - litebans.*
+  - bmsg.command.msg
+  - bmsg.command.reply
+  parents:
+  - JrMod
+  - Mod
+  - SrMod
