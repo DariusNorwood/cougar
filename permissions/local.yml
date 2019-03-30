@@ -1,0 +1,122 @@
+groups:
+  default:
+    options:
+      default: 'true'
+    permissions:
+    - modifyworld.*
+    inheritance: []
+  d1:
+    permissions:
+    - rank.d1
+    options:
+      prefix: '&b&lTIGER&b'
+  d2:
+    options:
+      prefix: '&d&lLION&d'
+    permissions:
+    - rank.d2
+    - rank.d1
+  d3:
+    options:
+      prefix: '&6&lCOUGAR&6'
+    permissions:
+    - rank.d3
+    - rank.d2
+    - rank.d1
+  helper:
+    options:
+      prefix: '&9&lHELPER&9'
+    permissions:
+    - rank.jrmod
+    - rank.d3
+    - rank.d2
+    - rank.d1
+  mod:
+    permissions:
+    - rank.mod
+    - rank.helper
+    - rank.d4
+    - rank.d3
+    - rank.d2
+    - rank.d1
+    options:
+      prefix: '&2&lMOD&2'
+  srmod:
+    permissions:
+    - rank.srmod
+    - rank.mod
+    - rank.jrmod
+    - rank.helper
+    - rank.d3
+    - rank.d2
+    - rank.d1
+    options:
+      prefix: '&2&lSR.MOD&2'
+  admin:
+    options:
+      prefix: '&4&lADMIN&c'
+    permissions:
+    - permissions*
+    - rank.admin
+    - rank.srmod
+    - rank.mod
+    - rank.jrmod
+    - rank.helper
+    - rank.d3
+    - rank.d2
+    - rank.d1
+  dev:
+    permissions:
+    - permissions*
+    - rank.admin
+    - rank.srmod
+    - rank.mod
+    - rank.jrmod
+    - rank.helper
+    - rank.d3
+    - rank.d2
+    - rank.d1
+    options:
+      prefix: '&4&lDEV&c'
+  owner:
+    permissions:
+    - rank.jrmod
+    - '*'
+    options:
+      prefix: '&4&lOWNER&c'
+  builder:
+    permissions:
+    - rank.builder
+    - rank.d3
+    - rank.d2
+    - rank.d1
+    options:
+      prefix: '&3&lBT&3'
+  YT:
+    permissions:
+    - rank.media
+    - rank.content
+    - rank.d3
+    - rank.d2
+    - rank.d1
+    options:
+      prefix: '&c&lYOUTUBER&4'
+  twitch:
+    permissions:
+    - rank.media
+    - rank.content
+    - rank.d3
+    - rank.d2
+    - rank.d1
+    options:
+      prefix: '&5&lSTREAMER&d'
+  op:
+    options:
+      prefix: '&4&LOP&c'
+    permissions:
+    - permissions*
+  love:
+    options:
+      prefix: '&d&kkek&d'
+schema-version: 1
+
